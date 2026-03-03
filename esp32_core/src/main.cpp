@@ -1,3 +1,17 @@
+/*
+Copyright (c) 2026 NyxOverflow
+
+Permission is granted to anyone to use, copy, modify, and distribute this software, 
+for educational and personal purposes only, provided that this notice is included. 
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. 
+THE AUTHOR IS NOT RESPONSIBLE FOR ANY DAMAGE, MISUSE, OR LEGAL CONSEQUENCES 
+RESULTING FROM THE USE OF THIS SOFTWARE.
+
+Use responsibly and ethically. This software is intended for learning, experimentation, 
+and personal development purposes only.
+*/
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -75,4 +89,5 @@ void setup() {
 void loop() {
   // update
   menu->update();
+
 }
