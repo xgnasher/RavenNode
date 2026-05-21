@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2026 NyxOverflow
+Copyright (c) 2026 NyxOverflow 
 
 Permission is granted to anyone to use, copy, modify, and distribute this software, 
 for educational and personal purposes only, provided that this notice is included. 
@@ -25,7 +25,7 @@ and personal development purposes only.
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
-#define NAV_PIN 15    // navigation button on p15 
+#define NAV_PIN 17    // navigation button on p17
 #define EXEC_PIN 16   // exec button on p16
 
 // screen
@@ -38,30 +38,55 @@ InputManager navButton(NAV_PIN);
 InputManager execButton(EXEC_PIN);
 
 // wifi
-WiFiManager wifi("WIFI_SSID", "PASSWORD", 2);
+WiFiManager wifi("SSID", "PASSWORD", 2);
 
 // menu options
-const char* options[] = {"BASIC SCAN", "Wifi CONNECT"};
+const char* options[] = {"Wifi CONNECT", "PORT SCAN","NFC HF 13.56 MHz","RFID LF 125 KHz","VERSION"};
 
 // options funtion
 void connectWiFi() {
     if(wifi.connect()) {
-        dm->showMessage("WiFi OK", 50);
+        dm->clearDisplay();
+        dm->drawHeader("WiFi Status");
+        dm->showMessage("Connected", 16);
     } else {
-        dm->showMessage("WiFi FAIL", 50);
+        dm->clearDisplay();
+        dm->drawHeader("WiFi Status");
+        dm->showMessage("Wrong password", 16);
     }
 }
 
 void runBasicScan() {
     if(wifi.isConnected()) {
-        scan->basicScan("IP_HERE"); // target ip
+        scan->basicScan("192.168.1.81"); // target ip
     } else {
-        dm->showMessage("No WiFi", 50);
+        dm->clearDisplay();
+        dm->drawHeader("ERROR");
+        dm->showMessage("No WiFi :(", 16);
     }
 }
 
+void NFCtools(){
+    dm->clearDisplay();
+    dm->drawHeader("NFC HF 13.56 MHz");
+    dm->showMessage("Still working \non it", 16);
+}
+
+void RFIDtools(){
+    dm->clearDisplay();
+    dm->drawHeader("RFID LF 125 KHz");
+    dm->showMessage("Working on it", 16);
+}
+
+void displayVersion(){
+    dm->clearDisplay();
+    dm->drawHeader("RavenOS");
+    dm->showMessage("Version 0.2", 16);
+    dm->showMessage("2026 NyxOverflow", 50);
+}
+
 // function signaler
-MenuAction actions[] = {runBasicScan, connectWiFi};
+MenuAction actions[] = {connectWiFi, runBasicScan, NFCtools, RFIDtools, displayVersion};
 MenuManager* menu;
 
 void setup() {
@@ -76,18 +101,17 @@ void setup() {
   dm = new DisplayManager(&display);
   scan = new ScanManager(dm);
   dm->bootScreen();
-  delay(2000);
+  delay(4000);
 
   // start buttons
   navButton.begin();
   execButton.begin();
 
   // start menu
-  menu = new MenuManager(dm, &navButton, &execButton, options, actions, 2);
+  menu = new MenuManager(dm, &navButton, &execButton, options, actions, 5);
 }
 
 void loop() {
   // update
   menu->update();
-
 }

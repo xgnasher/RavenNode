@@ -11,7 +11,7 @@ class DisplayManager {
 
     void showMenu(const char* options[], int numOptions, int selected);
     void showMessage(const char* msg, int line);
-    void clearDisplay();
+    void clearDisplay(); 
     void drawHeader(const char* text);
     void drawLine(const char* text, int y);
     void refresh();

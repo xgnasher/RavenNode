@@ -1,4 +1,6 @@
 #include "display_manager.h"
+#include "skull.h"
+#include "grim_reaper.h"
 
 DisplayManager::DisplayManager(Adafruit_SSD1306* display) {
   _display = display;
@@ -6,17 +8,27 @@ DisplayManager::DisplayManager(Adafruit_SSD1306* display) {
 
 // Boot screen
 void DisplayManager::bootScreen() {
+  _display->clearDisplay();
   _display->setTextSize(1);
   _display->setTextColor(SSD1306_WHITE);
-  _display->drawRect(0, 0, 128, 16, SSD1306_WHITE);
+  _display->drawRect(0, 0, 66, 16, SSD1306_WHITE);
   _display->setCursor(4 ,4);
   _display->println("BOOTING <3");
-  _display->drawRect(0, 16, 128, 48, SSD1306_WHITE);
-  _display->setCursor(4 ,20);
-  _display->println("ESP32 PenTest tool");
-  _display->setCursor(4 ,52);
-  _display->println("Dev by NyxOverflow");
-  _display->display(); // Refresh buffer
+  _display->setCursor(0 ,20);
+  _display->println("RavenNode");
+  _display->setCursor(0 ,44);
+  _display->println("RavenOS by");
+  _display->setCursor(0 ,54);
+  _display->println("NyxOverflow");
+  _display->drawBitmap(
+        64,
+        0,
+        grim_reaper,
+        64,
+        64,
+        SSD1306_WHITE
+  );
+  _display->display();
 }
 
 void DisplayManager::clearDisplay() {
@@ -53,8 +65,8 @@ void DisplayManager::showMenu(const char* options[], int numOptions, int selecte
   // Yellow part
   _display->drawRect(0, 0, 128, 16, SSD1306_WHITE); 
   _display->setTextColor(SSD1306_WHITE);
-  _display->setCursor(4, 4);
-  _display->println("TOOLS AND SCRIPTS"); 
+  _display->setCursor(8, 4);
+  _display->println("#TOOLS AND SCRIPTS#"); 
 
 // Options
     _display->setTextColor(SSD1306_WHITE);
