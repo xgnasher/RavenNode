@@ -27,6 +27,8 @@ Simple UI Menu
 - 128x64 SSD1306 Oled screen
 - ESP32 S2
 - 2x basic push buttons
+- PN532 NFC module
+- RDM6300 RFID module
 
 # Controls
 - Btn1 navigation = GPIO17
