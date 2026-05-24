@@ -4,13 +4,13 @@
 #include "display_manager.h"
 #include "input_manager.h"
 
-typedef void (*MenuAction)(); // option signaler
+typedef void (*MenuAction)();
 
 class MenuManager {
   public:
     MenuManager(DisplayManager* dm, InputManager* navBtn, InputManager* execBtn,
                 const char* opts[], MenuAction actions[], int numOpts);
-    void update(); // call on loop()
+    void update();
   private:
     DisplayManager* _dm;
     InputManager* _navBtn;
