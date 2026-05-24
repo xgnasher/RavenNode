@@ -20,7 +20,7 @@ Simple UI Menu
 - Ultra-light Nmap-style scanning
 - Early implementation (experimental)
 # Experimental Modules
-- NFC = still working
+- NFC = PN532 module read only
 - RFID = still working
 
 # Hardware
